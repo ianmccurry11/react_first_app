@@ -94,12 +94,14 @@ function findUserById(id) {
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
-    addUser(userToAdd);
-    res.status(200).end();
+    const user = addUser(userToAdd);
+    res.status(201).send(user).end();
 });
 
 function addUser(user){
+    user.id = "abc" + (parseInt(Math.random() * 899) + 100);
     users['users_list'].push(user);
+    return user;
 }
 
 app.delete('/users/:id', (req, res) => {
